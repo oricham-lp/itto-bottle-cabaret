@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>オリジナルボトル</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Zen+Old+Mincho:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cta-h: 72px;
+        --name-size: 5.833333333333333cqw;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      main {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 720px;
+        padding-bottom: calc(var(--cta-h) + env(safe-area-inset-bottom));
+      }
+
+      .stack {
+        line-height: 0;
+      }
+
+      .section {
+        position: relative;
+        width: 100%;
+        container-type: inline-size;
+      }
+
+      .section img {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0;
+      }
+
+      .section .feature-update {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        clip-path: inset(72.5% 5.7% 20.3% 27.3%);
+        pointer-events: none;
+      }
+
+      .section .reason-update {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        pointer-events: none;
+      }
+
+      .reason-update.card-03 { clip-path: inset(31.7% 2% 48.6% 67.5%); }
+      .reason-update.card-04 { clip-path: inset(52.6% 67.5% 28.3% 2%); }
+      .reason-update.card-05 { clip-path: inset(52.6% 34.5% 28.3% 34.7%); }
+
+      .alcohol-badge {
+        position: absolute;
+        top: 34%;
+        left: var(--badge-x);
+        transform: translate(-50%, -50%);
+        width: 11.8%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 1px solid #dbc6a6;
+        background: radial-gradient(circle at 35% 25%, #fffcf6, #f7ebdc);
+        color: #856341;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35cqw;
+        font-family: Arial, sans-serif;
+        line-height: 1.1;
+        pointer-events: none;
+      }
+
+      .alcohol-badge .alc-label {
+        font-size: 1.7cqw;
+        letter-spacing: 0.04em;
+      }
+
+      .alcohol-badge .alc-value {
+        font-size: 2.7cqw;
+        font-weight: 500;
+      }
+
+      .shop-name {
+        display: none;
+        pointer-events: none;
+        position: absolute;
+        top: 11.5%;
+        left: 50%;
+        z-index: 10;
+        width: 80%;
+        max-width: 80%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-family: "Zen Old Mincho", serif;
+      }
+
+      .shop-name.is-visible {
+        display: block;
+      }
+
+      .shop-name.has-logo {
+        top: 7%;
+      }
+
+      .shop-name .shop-logo {
+        display: none;
+        width: 32%;
+        height: auto;
+        margin: 0 auto;
+      }
+
+      .shop-name.has-logo .shop-logo {
+        display: block;
+      }
+
+      .shop-name.has-logo .name {
+        display: none;
+      }
+
+      .shop-name.is-latin {
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .shop-name .name {
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #c7366a;
+        letter-spacing: 0.12em;
+        font-size: var(--name-size);
+        line-height: 1.2;
+      }
+
+      .shop-name .label {
+        margin: 0.4em 0 0;
+        white-space: nowrap;
+        color: #b08a4a;
+        letter-spacing: 0.3em;
+        font-size: calc(var(--name-size) * 0.55);
+        line-height: 1.2;
+        font-family: "Zen Old Mincho", serif;
+      }
+
+      .coupon {
+        display: none;
+        pointer-events: none;
+        position: absolute;
+        left: 50%;
+        z-index: 10;
+        margin: 0;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+        text-align: center;
+        color: #c7366a;
+        letter-spacing: 0.1em;
+        font-size: 3.888888888888889cqw;
+        font-family: "Zen Old Mincho", serif;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .coupon.is-visible {
+        display: block;
+      }
+
+      .cta-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: #fff;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+        height: calc(var(--cta-h) + env(safe-area-inset-bottom));
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      .cta-inner {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        height: var(--cta-h);
+        max-width: 720px;
+        padding: 0 16px;
+      }
+
+      .cta-inner a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 48px;
+        height: 52px;
+        border-radius: 9999px;
+        background: #c9a84c;
+        color: #fff;
+        text-decoration: none;
+        font-family: "Zen Old Mincho", serif;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="stack">
+        <div class="section">
+          <img
+            src="01-hero.png"
+            alt="オリジナルボトル ヒーロー。世界に1本だけのボトルが1本から。クーポンコード枠付き。"
+            width="1080"
+            height="1920"
+            fetchpriority="high"
+          />
+          <img class="feature-update" src="01-hero-features.png" alt="最短翌日出荷（通常5日後お届け）。Alc 2.5％・LEDあり。ボトルプリントだから綺麗。" />
+          <div class="shop-name" id="shop-name">
+            <img class="shop-logo" src="oricham-itto-logo.png" alt="ORICHAM ITTO（酒の一斗）" width="1536" height="1024" />
+            <p class="name" id="shop-name-text"></p>
+            <p class="label">オリジナルボトル</p>
+          </div>
+          <p class="coupon" data-coupon style="top: 88.5%"></p>
+        </div>
+
+        <div class="section">
+          <img
+            src="02-reasons.png"
+            alt="選べるお酒は4種類。白・ロゼ・低アルコールマスカット・ノンアルコール。クーポンコード枠付き。"
+            width="1080"
+            height="1920"
+            loading="lazy"
+          />
+          <span class="alcohol-badge" style="--badge-x: 12.5%" role="img" aria-label="白：アルコール度数6％"><span class="alc-label">Alc</span><span class="alc-value">6%</span></span>
+          <span class="alcohol-badge" style="--badge-x: 34.5%" role="img" aria-label="ロゼ：アルコール度数6％"><span class="alc-label">Alc</span><span class="alc-value">6%</span></span>
+          <span class="alcohol-badge" style="--badge-x: 56.5%" role="img" aria-label="マスカット：アルコール度数2.5％"><span class="alc-label">Alc</span><span class="alc-value">2.5%</span></span>
+          <span class="alcohol-badge" style="--badge-x: 78.5%" role="img" aria-label="ノンアルコール：アルコール度数0％"><span class="alc-label">Alc</span><span class="alc-value">0%</span></span>
+          <p class="coupon" data-coupon style="top: 91.8%"></p>
+        </div>
+
+        <div class="section">
+          <img
+            src="03-drinks.png"
+            alt="選ばれる理由。オリジナルボトルの魅力と6つの特長。クーポンコード枠付き。"
+            width="1080"
+            height="1920"
+            loading="lazy"
+          />
+          <img class="reason-update card-03" src="reasons-update.png" alt="③ 最短翌日出荷（通常5日後お届け）" />
+          <img class="reason-update card-04" src="reasons-update-v5.png" alt="④ ボトルに直接プリントするから綺麗" />
+          <img class="reason-update card-05" src="reasons-update.png" alt="⑤ Alc 2.5%・LEDのご用意あり" />
+          <p class="coupon" data-coupon style="top: 90.5%"></p>
+        </div>
+
+        <div class="section">
+          <img
+            src="04-scenes.png"
+            alt="誕生日・記念日・イベント・推し活などおすすめシーン紹介。"
+            width="1080"
+            height="1920"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="section">
+          <img
+            src="05-keyholder.png"
+            alt="オリジナルボトルとおそろいのアクリルキーホルダーが無料でついてくる。クーポンコード枠付き。"
+            width="1080"
+            height="1920"
+            loading="lazy"
+          />
+          <p class="coupon" data-coupon style="top: 91.5%"></p>
+        </div>
+
+        <div class="section">
+          <img
+            src="06-steps.png"
+            alt="注文はかんたん5ステップ。デザイン作成から注文完了まで。飲酒に関する注意事項。"
+            width="1080"
+            height="1920"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div class="cta-bar">
+        <div class="cta-inner">
+          <a
+            href="https://cloud.i-designer.com/f/oricham/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >デザインを作成する</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        function decodePayload(raw) {
+          if (!raw) return null;
+          try {
+            var normalized = raw.replace(/-/g, "+").replace(/_/g, "/");
+            while (normalized.length % 4) normalized += "=";
+            var json = decodeURIComponent(
+              Array.prototype.map
+                .call(atob(normalized), function (c) {
+                  return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                })
+                .join("")
+            );
+            var data = JSON.parse(json);
+            if (!data || typeof data !== "object") return null;
+            return {
+              name: typeof data.n === "string" ? data.n : "",
+              coupon: typeof data.c === "string" ? data.c : "",
+            };
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function nameFontSizeCqw(name) {
+          var len = Array.from(name).length;
+          if (len <= 6) return (42 / 720) * 100;
+          if (len <= 10) return (34 / 720) * 100;
+          return (27 / 720) * 100;
+        }
+
+        function isAlphanumericOnly(name) {
+          return /^[A-Za-z0-9\s\-_.]+$/.test(name);
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var payload = decodePayload(params.get("d"));
+        var name = payload && payload.name ? payload.name : "";
+        var coupon = payload && payload.coupon ? payload.coupon : "";
+
+        var shop = document.getElementById("shop-name");
+        var shopText = document.getElementById("shop-name-text");
+        if (name) {
+          shopText.textContent = name;
+          if (name === "酒の一斗") shop.classList.add("has-logo");
+          shop.style.setProperty("--name-size", nameFontSizeCqw(name) + "cqw");
+          shop.classList.add("is-visible");
+          if (isAlphanumericOnly(name)) shop.classList.add("is-latin");
+          document.title = name + "｜オリジナルボトル";
+        }
+
+        if (coupon) {
+          document.querySelectorAll("[data-coupon]").forEach(function (el) {
+            el.textContent = coupon;
+            el.classList.add("is-visible");
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
