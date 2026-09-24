@@ -52,6 +52,16 @@
         margin: 0;
       }
 
+      .section .hero-heading-clean {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        clip-path: inset(2% 29% 93% 30%);
+        pointer-events: none;
+      }
+
       .section .feature-update {
         position: absolute;
         inset: 0;
@@ -125,12 +135,12 @@
       }
 
       .shop-name.has-logo {
-        top: 7%;
+        top: 1%;
       }
 
       .shop-name .shop-logo {
         display: none;
-        width: 32%;
+        width: 56%;
         height: auto;
         margin: 0 auto;
       }
@@ -241,6 +251,7 @@
             fetchpriority="high"
           />
           <img class="feature-update" src="01-hero-features.png" alt="最短翌日出荷（通常5日後お届け）。Alc 2.5％・LEDあり。ボトルプリントだから綺麗。" />
+          <img class="hero-heading-clean" src="hero-heading-clean.png" alt="" aria-hidden="true" />
           <div class="shop-name" id="shop-name">
             <img class="shop-logo" src="oricham-itto-logo.png" alt="ORICHAM ITTO（酒の一斗）" width="1536" height="1024" />
             <p class="name" id="shop-name-text"></p>
